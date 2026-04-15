@@ -2,8 +2,16 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🇯🇵 Japan Trip 2026</title>
+<meta name="theme-color" content="#0f0c0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Japan 2026">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -36,7 +44,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 300;
   min-height: 100vh;
   overscroll-behavior: none;
@@ -570,6 +578,167 @@ body {
   .city-banner { padding: 32px 24px 24px; }
   .cs-section { padding: 16px 20px 4px; }
 }
+
+/* ── COUNTDOWN ── */
+#countdown-val { transition: opacity 0.3s; }
+.countdown-gone { color: var(--sage) !important; }
+
+/* ── MAP LINKS ── */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--blue);
+  text-decoration: none;
+  border: 1px solid rgba(74,127,165,0.35);
+  border-radius: 12px;
+  padding: 1px 7px 1px 5px;
+  margin-left: 6px;
+  font-weight: 500;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.map-link:active { background: var(--blue-dim); }
+
+/* ── RAMEN CHECK-OFF ── */
+.ramen-card {
+  cursor: pointer;
+  transition: opacity 0.25s, background 0.25s;
+  position: relative;
+}
+.ramen-card.checked {
+  opacity: 0.48;
+  border-color: rgba(107,158,114,0.4);
+  background: rgba(107,158,114,0.06);
+}
+.ramen-card.checked .ramen-num { color: var(--sage); }
+.ramen-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: transparent;
+  background: var(--surface2);
+  flex-shrink: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+.ramen-card.checked .ramen-check {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: white;
+}
+.ramen-tracker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ramen-progress {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+}
+.ramen-progress span { color: var(--gold); font-weight: 600; }
+
+/* ── TEAMLAB TOGGLE ── */
+.teamlab-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+.tl-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-muted);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tl-btn.go-active { background: var(--sage-dim); border-color: var(--sage); color: var(--sage); }
+.tl-btn.skip-active { background: var(--red-dim); border-color: var(--red); color: #e07060; }
+
+/* ── WEATHER STRIP ── */
+.weather-strip {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 0 20px 14px;
+}
+.weather-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.weather-pill strong { color: var(--text); }
+
+/* ── APPS SECTION ── */
+.apps-header {
+  font-family: 'Shippori Mincho', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 1px solid rgba(212,168,67,0.3);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.app-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.app-icon { font-size: 24px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.app-name { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.3; }
+.app-desc { font-size: 10px; color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
+@media (min-width: 480px) { .apps-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── CURRENCY CHIP ── */
+.currency-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(212,168,67,0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0 16px 16px;
+}
+.currency-chip span { color: var(--text-dim); font-size: 11px; font-weight: 300; }
 </style>
 </head>
 <body>
@@ -581,7 +750,7 @@ body {
   <h1>Japan Trip <span>2026</span></h1>
   <div class="hero-sub">30 april – 13 mei 2026 · 4 steden · 14 dagen</div>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-val">14</div><div class="hero-stat-lbl">Dagen</div></div>
+    <div class="hero-stat"><div class="hero-stat-val" id="countdown-val">…</div><div class="hero-stat-lbl" id="countdown-lbl">Laden…</div></div>
     <div class="hero-stat"><div class="hero-stat-val">4</div><div class="hero-stat-lbl">Steden</div></div>
     <div class="hero-stat"><div class="hero-stat-val">6+</div><div class="hero-stat-lbl">Ramen stops</div></div>
     <div class="hero-stat"><div class="hero-stat-val">🟢</div><div class="hero-stat-lbl">Green Car</div></div>
@@ -591,12 +760,12 @@ body {
 <!-- NAV -->
 <div class="nav-wrap">
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="show('overview')"><span class="tab-emoji">📋</span>Overzicht</button>
-    <button class="nav-tab" onclick="show('tokyo1')"><span class="tab-emoji">🗼</span>Tokyo I</button>
-    <button class="nav-tab" onclick="show('kanazawa')"><span class="tab-emoji">🌊</span>Kanazawa</button>
-    <button class="nav-tab" onclick="show('kyoto')"><span class="tab-emoji">⛩️</span>Kyoto</button>
-    <button class="nav-tab" onclick="show('tokyo2')"><span class="tab-emoji">🛍️</span>Tokyo II</button>
-    <button class="nav-tab" onclick="show('cheatsheet')"><span class="tab-emoji">🗣️</span>Cheat-sheet</button>
+    <button class="nav-tab active" onclick="show('overview',this)"><span class="tab-emoji">📋</span>Overzicht</button>
+    <button class="nav-tab" onclick="show('tokyo1',this)"><span class="tab-emoji">🗼</span>Tokyo I</button>
+    <button class="nav-tab" onclick="show('kanazawa',this)"><span class="tab-emoji">🌊</span>Kanazawa</button>
+    <button class="nav-tab" onclick="show('kyoto',this)"><span class="tab-emoji">⛩️</span>Kyoto</button>
+    <button class="nav-tab" onclick="show('tokyo2',this)"><span class="tab-emoji">🛍️</span>Tokyo II</button>
+    <button class="nav-tab" onclick="show('cheatsheet',this)"><span class="tab-emoji">🗣️</span>Cheat-sheet</button>
   </div>
 </div>
 
@@ -669,14 +838,65 @@ body {
   </div>
 
   <div class="ramen-section">
-    <div class="ramen-title">🍜 Ramen Route — 6 stops</div>
-    <div class="ramen-grid">
-      <div class="ramen-card"><div class="ramen-num">1</div><div class="ramen-info"><div class="ramen-name">Kyushu Jangara</div><div class="ramen-place">📍 Ueno, Tokyo · Dag 1 aankomst</div><div class="ramen-desc">Hakata-stijl tonkotsu. Eerste ramen in Japan — direct na aankomst.</div></div></div>
-      <div class="ramen-card"><div class="ramen-num">2</div><div class="ramen-info"><div class="ramen-name">Fuunji</div><div class="ramen-place">📍 Shinjuku, Tokyo · Dag 2 avond</div><div class="ramen-desc">Tsukemen (dip-ramen) met dikke noodles en intense visbouillon. Top-10 Tokyo.</div></div></div>
-      <div class="ramen-card"><div class="ramen-num">3</div><div class="ramen-info"><div class="ramen-name">Menya Taiga</div><div class="ramen-place">📍 Kanazawa · Avond dag 1</div><div class="ramen-desc">Lokale Kanazawa-stijl: lichte shoyu met seafood toppings. Heel anders dan Tokyo.</div></div></div>
-      <div class="ramen-card"><div class="ramen-num">4</div><div class="ramen-info"><div class="ramen-name">Kyoto Ramen Koji</div><div class="ramen-place">📍 Kyoto Station B1 · Dag 3 lunch</div><div class="ramen-desc">8 top-restaurants onder één dak. Kyoto chintan shoyu-stijl. Vergelijk alle stijlen.</div></div></div>
-      <div class="ramen-card"><div class="ramen-num">5</div><div class="ramen-info"><div class="ramen-name">Kinryu Ramen</div><div class="ramen-place">📍 Dotonbori, Osaka · Dag 4 avond</div><div class="ramen-desc">Restaurant met de draak op het dak. Kotteri (extra vet, rijke bouillon). Open tot 05:00.</div></div></div>
-      <div class="ramen-card"><div class="ramen-num">6</div><div class="ramen-info"><div class="ramen-name">Nakiryu</div><div class="ramen-place">📍 Otsuka, Tokyo · Tokyo II dag 3</div><div class="ramen-desc">Michelin-ster tantanmen. Sesamrijke bouillon. Ga bij opening — wachtrij max 30 min.</div></div></div>
+    <div class="ramen-title ramen-tracker-header">
+      <span>🍜 Ramen Route — 6 stops</span>
+      <span class="ramen-progress" id="ramen-counter"><span id="ramen-count">0</span>/6 gegeten</span>
+    </div>
+    <div class="ramen-grid" id="ramen-grid">
+      <div class="ramen-card" data-ramen-id="1" onclick="toggleRamen('1')">
+        <div class="ramen-num">1</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Kyushu Jangara <a href="https://maps.google.com/?q=Kyushu+Jangara+Ueno+Tokyo" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Ueno, Tokyo · Dag 1 aankomst</div>
+          <div class="ramen-desc">Hakata-stijl tonkotsu. Eerste ramen in Japan — direct na aankomst.</div>
+        </div>
+        <div class="ramen-check" id="rc-1"></div>
+      </div>
+      <div class="ramen-card" data-ramen-id="2" onclick="toggleRamen('2')">
+        <div class="ramen-num">2</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Fuunji <a href="https://maps.google.com/?q=Fuunji+Shinjuku+Tokyo" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Shinjuku, Tokyo · Dag 2 avond</div>
+          <div class="ramen-desc">Tsukemen (dip-ramen) met dikke noodles en intense visbouillon. Top-10 Tokyo.</div>
+        </div>
+        <div class="ramen-check" id="rc-2"></div>
+      </div>
+      <div class="ramen-card" data-ramen-id="3" onclick="toggleRamen('3')">
+        <div class="ramen-num">3</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Menya Taiga <a href="https://maps.google.com/?q=Menya+Taiga+Kanazawa" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Kanazawa · Avond dag 1</div>
+          <div class="ramen-desc">Lokale Kanazawa-stijl: lichte shoyu met seafood toppings. Heel anders dan Tokyo.</div>
+        </div>
+        <div class="ramen-check" id="rc-3"></div>
+      </div>
+      <div class="ramen-card" data-ramen-id="4" onclick="toggleRamen('4')">
+        <div class="ramen-num">4</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Kyoto Ramen Koji <a href="https://maps.google.com/?q=Kyoto+Ramen+Koji+Station" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Kyoto Station B1 · Dag 3 lunch</div>
+          <div class="ramen-desc">8 top-restaurants onder één dak. Kyoto chintan shoyu-stijl. Vergelijk alle stijlen.</div>
+        </div>
+        <div class="ramen-check" id="rc-4"></div>
+      </div>
+      <div class="ramen-card" data-ramen-id="5" onclick="toggleRamen('5')">
+        <div class="ramen-num">5</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Kinryu Ramen <a href="https://maps.google.com/?q=Kinryu+Ramen+Dotonbori+Osaka" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Dotonbori, Osaka · Dag 4 avond</div>
+          <div class="ramen-desc">Restaurant met de draak op het dak. Kotteri (extra vet, rijke bouillon). Open tot 05:00.</div>
+        </div>
+        <div class="ramen-check" id="rc-5"></div>
+      </div>
+      <div class="ramen-card" data-ramen-id="6" onclick="toggleRamen('6')">
+        <div class="ramen-num">6</div>
+        <div class="ramen-info">
+          <div class="ramen-name">Nakiryu <a href="https://maps.google.com/?q=Nakiryu+Otsuka+Tokyo" target="_blank" class="map-link" onclick="event.stopPropagation()">📍</a></div>
+          <div class="ramen-place">📍 Otsuka, Tokyo · Tokyo II dag 3</div>
+          <div class="ramen-desc">Michelin-ster tantanmen. Sesamrijke bouillon. Ga bij opening — wachtrij max 30 min.</div>
+        </div>
+        <div class="ramen-check" id="rc-6"></div>
+      </div>
     </div>
   </div>
 
@@ -705,6 +925,11 @@ body {
       </div>
     </div>
     <div class="city-banner-badge">30 april – 2 mei · 2 nachten</div>
+  </div>
+  <div class="weather-strip">
+    <div class="weather-pill">🌤️ <strong>~19°C</strong> overdag</div>
+    <div class="weather-pill">🌧️ Wisselvallig — neem een compact regenjasje</div>
+    <div class="weather-pill">💧 Luchtvochtigheid hoog</div>
   </div>
 
   <div class="train-card">
@@ -743,14 +968,14 @@ body {
           <div class="item-time">13:30</div>
           <div class="item-body">
             <div class="item-name">🍜 Eerste ramen in Japan</div>
-            <div class="item-desc">Kyushu Jangara (10 min lopen) voor klassieke tonkotsu. Of kies de tent met de meeste Japanners erin — dat is altijd het goede teken.</div>
+            <div class="item-desc"><a href="https://maps.google.com/?q=Kyushu+Jangara+Ueno+Tokyo" target="_blank" class="map-link">📍 Maps</a> Kyushu Jangara (10 min lopen) voor klassieke tonkotsu. Of kies de tent met de meeste Japanners erin — dat is altijd het goede teken.</div>
             <div class="item-tags"><span class="tag tag-food">🍜 Ramen</span></div>
           </div>
         </div>
         <div class="item">
           <div class="item-time">14:30</div>
           <div class="item-body">
-            <div class="item-name">Ameyoko Market</div>
+            <div class="item-name">Ameyoko Market <a href="https://maps.google.com/?q=Ameyoko+Market+Ueno+Tokyo" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Straatmarkt vlak bij hotel. Seafood kramen, vintage kleding, street food snacks. Perfecte eerste indruk terwijl je wacht op inchecken.</div>
             <div class="item-tags"><span class="tag tag-shop">Markt</span><span class="tag tag-food">Street food</span></div>
           </div>
@@ -786,7 +1011,7 @@ body {
         <div class="item">
           <div class="item-time">08:00</div>
           <div class="item-body">
-            <div class="item-name">Senso-ji Tempel — Asakusa</div>
+            <div class="item-name">Senso-ji Tempel — Asakusa <a href="https://maps.google.com/?q=Senso-ji+Temple+Asakusa+Tokyo" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Ja, toeristisch — maar vóór 08:30 is het verschil tussen magie en mensenmassa. Skip de Chinese rommel op Nakamise, focus op de zijsteegjes (Nishi-Sando) voor echte Japanse kramen.</div>
             <div class="item-tags"><span class="tag tag-culture">Cultuur</span></div>
           </div>
@@ -818,7 +1043,7 @@ body {
         <div class="item">
           <div class="item-time">19:30</div>
           <div class="item-body">
-            <div class="item-name">🍜 Ramen: Fuunji — Shinjuku</div>
+            <div class="item-name">🍜 Ramen: Fuunji — Shinjuku <a href="https://maps.google.com/?q=Fuunji+Shinjuku+Tokyo" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Tsukemen (dip-ramen) met dikke noodles en intense visbouillon. Staat in elke serieuze Tokyo ramen-lijst. Wachtrij is normaal — het is de moeite waard.</div>
             <div class="item-tags"><span class="tag tag-food">🍜 Ramen</span></div>
           </div>
@@ -849,6 +1074,11 @@ body {
       </div>
     </div>
     <div class="city-banner-badge">2 mei – 5 mei · 3 nachten</div>
+  </div>
+  <div class="weather-strip">
+    <div class="weather-pill">🌧️ <strong>~17°C</strong> — nattigste stad van de route</div>
+    <div class="weather-pill">☔ Kans op regen hoog in mei</div>
+    <div class="weather-pill">🌊 Koeler dan Tokyo</div>
   </div>
 
   <div class="train-card">
@@ -887,7 +1117,7 @@ body {
         <div class="item">
           <div class="item-time">12:00</div>
           <div class="item-body">
-            <div class="item-name">🦀 Direct: Omicho Market</div>
+            <div class="item-name">🦀 Direct: Omicho Market <a href="https://maps.google.com/?q=Omicho+Market+Kanazawa" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Verse krab, kaisendon, sashimi van de dag. Markten zijn 's ochtends en middag op hun best — dit is het juiste moment.</div>
             <div class="item-tags"><span class="tag tag-food">Must-eat</span><span class="tag tag-shop">Markt</span></div>
           </div>
@@ -895,7 +1125,7 @@ body {
         <div class="item">
           <div class="item-time">13:30</div>
           <div class="item-body">
-            <div class="item-name">Kenroku-en Garden</div>
+            <div class="item-name">Kenroku-en Garden <a href="https://maps.google.com/?q=Kenroku-en+Garden+Kanazawa" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Een van Japan's drie beroemdste tuinen. Weelderig groen, vijvers, traditionele lantaarns. Perfect voor de uren voor inchecken.</div>
             <div class="item-tags"><span class="tag tag-nature">Must-see</span></div>
           </div>
@@ -907,7 +1137,7 @@ body {
         <div class="item">
           <div class="item-time">16:30</div>
           <div class="item-body">
-            <div class="item-name">Higashi Chaya District</div>
+            <div class="item-name">Higashi Chaya District <a href="https://maps.google.com/?q=Higashi+Chaya+District+Kanazawa" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Edo-era geisha wijk. Historische houten huizen, goudblad-winkeltjes, theehuizen. Mooiste in het late middagslicht.</div>
             <div class="item-tags"><span class="tag tag-culture">Cultuur</span><span class="tag tag-shop">Souvenirs</span></div>
           </div>
@@ -915,7 +1145,7 @@ body {
         <div class="item">
           <div class="item-time">19:00</div>
           <div class="item-body">
-            <div class="item-name">🍜 Ramen diner: Menya Taiga</div>
+            <div class="item-name">🍜 Ramen diner: Menya Taiga <a href="https://maps.google.com/?q=Menya+Taiga+Kanazawa" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Kanazawa-stijl ramen: shoyu-basis met seafood toppings. Daarna een glas lokale sake in een kleine izakaya.</div>
             <div class="item-tags"><span class="tag tag-food">🍜 Ramen</span></div>
           </div>
@@ -944,7 +1174,7 @@ body {
         <div class="item">
           <div class="item-time">11:00</div>
           <div class="item-body">
-            <div class="item-name">Ninja-dera (Myoryuji Tempel)</div>
+            <div class="item-name">Ninja-dera (Myoryuji Tempel) <a href="https://maps.google.com/?q=Myoryuji+Temple+Kanazawa" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Beroemde "ninjatempel" vol geheime gangen en valluiken. <strong>Reserveer vooraf!</strong> Engelstalige tour beschikbaar.</div>
             <div class="item-tags"><span class="tag tag-culture">Must-see</span></div>
           </div>
@@ -1037,6 +1267,11 @@ body {
     </div>
     <div class="city-banner-badge">5 mei – 9 mei · 4 nachten</div>
   </div>
+  <div class="weather-strip">
+    <div class="weather-pill">🌸 <strong>~22°C</strong> — warmste stad van de route</div>
+    <div class="weather-pill">⛅ Afgewisseld bewolkt en zonnig</div>
+    <div class="weather-pill">👟 Comfortabel voor tempels en wandelingen</div>
+  </div>
 
   <div class="train-card">
     <div class="train-row"><span class="train-badge">Tsurugi 11</span> Kanazawa <span class="train-time">09:12</span> <span class="train-arrow">→</span> Tsuruga <span class="train-time">09:34</span> · ☕ 40 min overstap</div>
@@ -1075,7 +1310,7 @@ body {
         <div class="item">
           <div class="item-time">11:30</div>
           <div class="item-body">
-            <div class="item-name">🦑 Direct: Nishiki Market</div>
+            <div class="item-name">🦑 Direct: Nishiki Market <a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">5 min lopen van station. Gegrilde octopus-spiesjes, sashimi, tamagoyaki, matcha mochi. Loop de hele markt door en proef van elk kraampje. Plan 1,5 uur — een van de hoogtepunten van de reis.</div>
             <div class="item-tags"><span class="tag tag-food">Must-eat</span><span class="tag tag-shop">Markt</span></div>
           </div>
@@ -1083,7 +1318,7 @@ body {
         <div class="item">
           <div class="item-time">13:30</div>
           <div class="item-body">
-            <div class="item-name">Fushimi Inari Shrine</div>
+            <div class="item-name">Fushimi Inari Shrine <a href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Duizenden rode torii-poorten over asfaltpaden. Ga de hele weg omhoog (4km, 2–3 uur) voor het uitzicht dat 90% nooit ziet. Terug ~16:30 — perfect voor inchecken.</div>
             <div class="item-tags"><span class="tag tag-culture">Must-see</span><span class="tag tag-nature">Wandelen</span></div>
           </div>
@@ -1116,7 +1351,7 @@ body {
         <div class="item">
           <div class="item-time">08:00</div>
           <div class="item-body">
-            <div class="item-name">Arashiyama Bamboebos</div>
+            <div class="item-name">Arashiyama Bamboebos <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Ga vroeg voor de magie zonder selfie-sticks. 10 min lopen vanuit station Saga-Arashiyama.</div>
             <div class="item-tags"><span class="tag tag-nature">Must-see</span></div>
           </div>
@@ -1177,7 +1412,7 @@ body {
         <div class="item">
           <div class="item-time">08:30</div>
           <div class="item-body">
-            <div class="item-name">Kinkaku-ji (Gouden Paviljoen)</div>
+            <div class="item-name">Kinkaku-ji (Gouden Paviljoen) <a href="https://maps.google.com/?q=Kinkakuji+Golden+Pavilion+Kyoto" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Ja, toeristisch. Ja, druk. Maar vóór 09:00 is de reflectie in het water bij ochtendlicht echt spectaculair. Ga, maak de foto, loop snel door.</div>
             <div class="item-tags"><span class="tag tag-culture">Must-see</span></div>
           </div>
@@ -1201,7 +1436,7 @@ body {
         <div class="item">
           <div class="item-time">13:00</div>
           <div class="item-body">
-            <div class="item-name">🍜 Ramen lunch: Kyoto Ramen Koji</div>
+            <div class="item-name">🍜 Ramen lunch: Kyoto Ramen Koji <a href="https://maps.google.com/?q=Kyoto+Ramen+Koji+Station" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Kyoto Station B1 — 8 van de beste ramen-restaurants van de regio onder één dak. Kyoto-stijl: lichte chintan shoyu-bouillon. Vergelijk alle stijlen.</div>
             <div class="item-tags"><span class="tag tag-food">🍜 Ramen</span></div>
           </div>
@@ -1277,7 +1512,7 @@ body {
         <div class="item">
           <div class="item-time">18:30</div>
           <div class="item-body">
-            <div class="item-name">🍜 Dotonbori avond + Kinryu Ramen</div>
+            <div class="item-name">🍜 Dotonbori avond + Kinryu Ramen <a href="https://maps.google.com/?q=Kinryu+Ramen+Dotonbori+Osaka" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Neonlichten aan — explosie van licht en geur. Street food rondje: krab op stokje, gyoza, kushikatsu. Dan Kinryu Ramen (restaurant met draak op het dak, direct op Dotonbori) — Osaka kotteri stijl, open tot 05:00.</div>
             <div class="item-tags"><span class="tag tag-food">🍜 Ramen</span><span class="tag tag-culture">Must-see</span></div>
           </div>
@@ -1344,6 +1579,11 @@ body {
       </div>
     </div>
     <div class="city-banner-badge">9 mei – 13 mei · 4 nachten</div>
+  </div>
+  <div class="weather-strip">
+    <div class="weather-pill">☀️ <strong>~21°C</strong> — aangenamer dan eind april</div>
+    <div class="weather-pill">🌂 Nog kans op buien, maar minder</div>
+    <div class="weather-pill">🛍️ Perfect shopweer</div>
   </div>
 
   <div class="train-card">
@@ -1475,21 +1715,29 @@ body {
         <div class="item">
           <div class="item-time">10:00</div>
           <div class="item-body">
-            <div class="item-name">🎨 teamLab Planets — Toyosu <span style="font-size:10px;color:var(--purple);font-weight:500">(beslissing open)</span></div>
+            <div class="item-name">🎨 teamLab Planets — Toyosu <a href="https://maps.google.com/?q=teamLab+Planets+Toyosu+Tokyo" target="_blank" class="map-link">📍 Maps</a> <span style="font-size:10px;color:var(--purple);font-weight:500">(beslissing open)</span></div>
             <div class="item-desc">Waterinstallaties, spiegelkamers, bloemenprojecties. ~¥3.200 pp, vooraf boeken. Gratis annuleren tot 24u van tevoren — boek alvast en beslis later.</div>
             <div class="item-tags"><span class="tag tag-culture">Must-do</span><span class="tag tag-tip">Beslissing open</span></div>
-            <div class="decision-box">
-              <h4>🔀 Als je teamLab skipped:</h4>
+            <div class="decision-box" id="teamlab-decision">
+              <h4>🔀 Ga je of niet?</h4>
+              <div class="teamlab-btns">
+                <button class="tl-btn" id="tl-go" onclick="setTeamLab('go')">✅ Ja, we gaan!</button>
+                <button class="tl-btn" id="tl-skip" onclick="setTeamLab('skip')">⏭️ We skippen</button>
+                <button class="tl-btn" onclick="setTeamLab('undecided')">🤔 Nog open</button>
+              </div>
+              <div id="teamlab-alt" style="margin-top:8px">
+              <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Als je skipped:</p>
               <div class="alt-item"><div class="alt-emoji">🐟</div><div class="alt-text"><strong>Toyosu Fish Market</strong> — kijk neer op de tonijnveilinghal vanuit glazen galerij. Gratis, loopafstand. Daarna verse sushi in het marktgebouw.</div></div>
               <div class="alt-item"><div class="alt-emoji">🍜</div><div class="alt-text"><strong>Nakiryu</strong> (Otsuka) — Michelin-ster tantanmen met sesamrijke bouillon. Ga bij opening, wachtrij max 30 min.</div></div>
               <div class="alt-item"><div class="alt-emoji">🛍️</div><div class="alt-text"><strong>Extra shopping</strong> — Ginza ochtend voor Uniqlo flagship (12 verdiepingen!) + Muji headquarters + Apple Store.</div></div>
+              </div><!-- /teamlab-alt -->
             </div>
           </div>
         </div>
         <div class="item">
           <div class="item-time">13:00</div>
           <div class="item-body">
-            <div class="item-name">🦪 Street food lunch: Tsukiji Outer Market</div>
+            <div class="item-name">🦪 Street food lunch: Tsukiji Outer Market <a href="https://maps.google.com/?q=Tsukiji+Outer+Market+Tokyo" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Tokyo's beste street food bestemming. Vers sushi, gegrilde scallops, tamagoyaki, tuna op rijst. Geen tafels — eten terwijl je loopt.</div>
             <div class="item-tags"><span class="tag tag-food">Must-eat</span></div>
           </div>
@@ -1518,7 +1766,7 @@ body {
         <div class="item">
           <div class="item-time">09:30</div>
           <div class="item-body">
-            <div class="item-name">👟 Onitsuka Tiger Flagship — Minami-Aoyama</div>
+            <div class="item-name">👟 Onitsuka Tiger Flagship — Minami-Aoyama <a href="https://maps.google.com/?q=Onitsuka+Tiger+flagship+Minami-Aoyama+Tokyo" target="_blank" class="map-link">📍 Maps</a></div>
             <div class="item-desc">Grootste flagship van Japan. Exclusieve Japan-only modellen die je thuis niet vindt. Ga vroeg voor beste selectie. Loopafstand van Omotesando station.</div>
             <div class="item-tags"><span class="tag tag-shop">Sneakers</span></div>
           </div>
@@ -1605,6 +1853,8 @@ body {
     </div>
     <div class="city-banner-badge">Rana, Lalla, Jhilani & Rouzbeh</div>
   </div>
+
+  <div class="currency-chip">💴 €1 ≈ ¥160 <span>· €10 ≈ ¥1.600 · €50 ≈ ¥8.000 · €100 ≈ ¥16.000</span></div>
 
   <div style="padding: 0 16px 12px">
     <div class="tips-box">
@@ -1752,6 +2002,43 @@ body {
     </table>
   </div>
 
+  <!-- APPS -->
+  <div class="cs-section">
+    <h3>📱 Download vóór vertrek</h3>
+  </div>
+  <div style="padding: 0 16px 16px">
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-icon">🌐</div>
+        <div>
+          <div class="app-name">Google Translate</div>
+          <div class="app-desc">Download Japans offline (500MB). Camera-vertaling werkt ook zonder internet — levensreddend bij menu's.</div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🗺️</div>
+        <div>
+          <div class="app-name">Google Maps offline</div>
+          <div class="app-desc">Download Japan offline regio. Metro + navigatie werkt ook zonder data.</div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🚄</div>
+        <div>
+          <div class="app-name">Hyperdia / Navitime</div>
+          <div class="app-desc">Japanse trein- en metroplanner. Beter dan Google Maps voor shinkansen en transfers.</div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">💳</div>
+        <div>
+          <div class="app-name">IC Card (Suica)</div>
+          <div class="app-desc">Haal bij Narita of voeg toe aan Apple/Google Wallet. Betaal metro, conbini en zelfs ramen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div style="height: 24px"></div>
 </div>
 
@@ -1759,37 +2046,120 @@ body {
 <button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-function show(id) {
+// ── TAB NAVIGATION + URL DEEP LINKING ──
+function show(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (btn) btn.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    const url = new URL(window.location);
+    url.searchParams.set('tab', id);
+    history.replaceState(null, '', url);
+  } catch(e) {}
+  // Open first day block
+  setTimeout(() => {
+    const panel = document.getElementById(id);
+    if (panel) {
+      const first = panel.querySelector('.day-block');
+      if (first && !first.classList.contains('open')) first.classList.add('open');
+    }
+  }, 50);
 }
 
+// Load tab from URL on startup
+(function() {
+  const tab = new URLSearchParams(window.location.search).get('tab');
+  if (tab && document.getElementById(tab)) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(b => {
+      const oc = b.getAttribute('onclick') || '';
+      b.classList.toggle('active', oc.includes("'" + tab + "'"));
+    });
+  }
+})();
+
 function toggleDay(header) {
-  const block = header.parentElement;
-  block.classList.toggle('open');
+  header.parentElement.classList.toggle('open');
 }
 
 // Scroll to top button
 window.addEventListener('scroll', () => {
-  const btn = document.getElementById('scrollBtn');
-  btn.classList.toggle('visible', window.scrollY > 300);
+  document.getElementById('scrollBtn').classList.toggle('visible', window.scrollY > 300);
 });
 
-// Open first day block by default on tab switch
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    setTimeout(() => {
-      const activePanel = document.querySelector('.panel.active');
-      if (activePanel) {
-        const firstBlock = activePanel.querySelector('.day-block');
-        if (firstBlock) firstBlock.classList.add('open');
-      }
-    }, 50);
+// ── LIVE COUNTDOWN (30 april 2026, Amsterdam time = UTC+2) ──
+function updateCountdown() {
+  const departure = new Date('2026-04-30T00:00:00+02:00');
+  const now = new Date();
+  const diff = departure - now;
+  const valEl = document.getElementById('countdown-val');
+  const lblEl = document.getElementById('countdown-lbl');
+  if (!valEl) return;
+  if (diff <= 0) {
+    valEl.textContent = '🇯🇵';
+    valEl.classList.add('countdown-gone');
+    lblEl.textContent = 'Op reis!';
+  } else {
+    const days = Math.floor(diff / 86400000);
+    valEl.textContent = days;
+    lblEl.textContent = days === 1 ? 'Dag!' : 'Dagen';
+  }
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// ── RAMEN CHECK-OFF TRACKER (localStorage) ──
+const RAMEN_KEY = 'japan2026_ramen';
+function getRamenState() {
+  try { return JSON.parse(localStorage.getItem(RAMEN_KEY)) || {}; } catch { return {}; }
+}
+function toggleRamen(id) {
+  const s = getRamenState();
+  s[id] = !s[id];
+  localStorage.setItem(RAMEN_KEY, JSON.stringify(s));
+  applyRamenState();
+}
+function applyRamenState() {
+  const s = getRamenState();
+  let count = 0;
+  document.querySelectorAll('.ramen-card[data-ramen-id]').forEach(card => {
+    const id = card.dataset.ramenId;
+    const done = !!s[id];
+    card.classList.toggle('checked', done);
+    const check = card.querySelector('.ramen-check');
+    if (check) check.textContent = done ? '✓' : '';
+    if (done) count++;
   });
-});
+  const el = document.getElementById('ramen-count');
+  if (el) el.textContent = count;
+}
+applyRamenState();
+
+// ── SERVICE WORKER ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
+// ── TEAMLAB TOGGLE (localStorage) ──
+const TL_KEY = 'japan2026_teamlab';
+function setTeamLab(choice) {
+  localStorage.setItem(TL_KEY, choice);
+  applyTeamLabState();
+}
+function applyTeamLabState() {
+  const choice = localStorage.getItem(TL_KEY) || 'undecided';
+  const go = document.getElementById('tl-go');
+  const skip = document.getElementById('tl-skip');
+  const alt = document.getElementById('teamlab-alt');
+  if (!go) return;
+  go.className = 'tl-btn' + (choice === 'go' ? ' go-active' : '');
+  skip.className = 'tl-btn' + (choice === 'skip' ? ' skip-active' : '');
+  if (alt) alt.style.display = (choice === 'go') ? 'none' : 'block';
+}
+applyTeamLabState();
 </script>
 </body>
 </html>
