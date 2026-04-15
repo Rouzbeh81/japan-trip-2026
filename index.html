@@ -163,19 +163,20 @@ body {
   position: relative;
   padding: 28px 20px 20px;
   overflow: hidden;
+  background: var(--surface);
 }
 .city-banner::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--surface) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(45,38,32,0.9) 0%, transparent 65%);
   pointer-events: none;
 }
 .city-banner-jp {
-  font-family: 'Shippori Mincho', serif;
+  font-family: 'Shippori Mincho', Georgia, serif;
   font-size: clamp(60px, 22vw, 100px);
   font-weight: 800;
-  color: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.055);
   position: absolute;
   right: -10px;
   top: 50%;
@@ -185,19 +186,25 @@ body {
 }
 .city-banner-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .city-banner-icon { font-size: 28px; }
-.city-banner h2 { font-family: 'Shippori Mincho', serif; font-size: 24px; font-weight: 700; }
-.city-banner-meta { font-size: 12px; color: var(--text-dim); }
+.city-banner h2 {
+  font-family: 'Shippori Mincho', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f5ede0;
+}
+.city-banner-meta { font-size: 13px; color: rgba(240,232,220,0.82); }
 .city-banner-badge {
   display: inline-block;
-  background: var(--gold-dim);
-  color: var(--gold);
-  font-size: 10px;
-  letter-spacing: 1.5px;
+  background: rgba(212,168,67,0.18);
+  color: #e0b84a;
+  font-size: 11px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 20px;
   margin-top: 8px;
-  border: 1px solid rgba(212,168,67,0.2);
+  border: 1px solid rgba(212,168,67,0.35);
+  font-weight: 500;
 }
 
 /* ── TRAIN CARD ── */
@@ -582,6 +589,11 @@ body {
 /* ── COUNTDOWN ── */
 #countdown-val { transition: opacity 0.3s; }
 .countdown-gone { color: var(--sage) !important; }
+.hero-stat--countdown {
+  border-color: rgba(212,168,67,0.3) !important;
+  background: rgba(212,168,67,0.07) !important;
+}
+.hero-stat--countdown .hero-stat-lbl { color: var(--gold) !important; opacity: 0.85; }
 
 /* ── MAP LINKS ── */
 .map-link {
@@ -750,10 +762,10 @@ body {
   <h1>Japan Trip <span>2026</span></h1>
   <div class="hero-sub">30 april – 13 mei 2026 · 4 steden · 14 dagen</div>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-val" id="countdown-val">…</div><div class="hero-stat-lbl" id="countdown-lbl">Laden…</div></div>
+    <div class="hero-stat hero-stat--countdown"><div class="hero-stat-val" id="countdown-val">…</div><div class="hero-stat-lbl" id="countdown-lbl">Tot vertrek</div></div>
     <div class="hero-stat"><div class="hero-stat-val">4</div><div class="hero-stat-lbl">Steden</div></div>
     <div class="hero-stat"><div class="hero-stat-val">6+</div><div class="hero-stat-lbl">Ramen stops</div></div>
-    <div class="hero-stat"><div class="hero-stat-val">🟢</div><div class="hero-stat-lbl">Green Car</div></div>
+    <div class="hero-stat"><div class="hero-stat-val" style="font-size:13px;line-height:1.2">30 apr</div><div class="hero-stat-lbl">Vertrek ✈️</div></div>
   </div>
 </div>
 
@@ -2105,7 +2117,7 @@ function updateCountdown() {
   } else {
     const days = Math.floor(diff / 86400000);
     valEl.textContent = days;
-    lblEl.textContent = days === 1 ? 'Dag!' : 'Dagen';
+    lblEl.textContent = days === 1 ? 'Dag tot ✈️' : 'Dagen tot ✈️';
   }
 }
 updateCountdown();
